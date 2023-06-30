@@ -1,6 +1,20 @@
 <?php
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     include 'connect.php';
+    $userName = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+
+    $sql = "insert into registration(username,email,password) values('$userName','$email','" . md5($password) . "')";
+    $result = mysqli_query($con,$sql);
+
+    if($result){
+        echo "Data inserted into the database";
+    }
+    else{
+        die(mysqli_error($con));
+    }
 }
 ?>
 <!doctype html>
@@ -19,7 +33,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <form action="signup.php" method="post">
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="email" class="form-control" placeholder="Enter your name" name="username">
+                <input type="text" class="form-control" placeholder="Enter your name" name="username">
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
