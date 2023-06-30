@@ -1,3 +1,8 @@
+<?php
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    include 'connect.php';
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -11,7 +16,7 @@
 <body>
     <h1 class="text-center">Sign up page</h1>
     <div class="container mt-5">
-        <form>
+        <form action="signup.php" method="post">
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <input type="email" class="form-control" placeholder="Enter your name" name="username">
