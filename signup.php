@@ -5,7 +5,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-
+    /*
     $sql = "insert into registration(username,email,password) values('$userName','$email','" . md5($password) . "')";
     $result = mysqli_query($con,$sql);
 
@@ -15,6 +15,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     else{
         die(mysqli_error($con));
     }
+    */
+    $sql = "select * from registration where username='$username'";
+    $result = mysqli_query($con,$sql);
+    if($result){
+        $num=mysqli_num_rows($result);
+        if($num>0){
+            echo "User already exists";
+        }
+    }
+
 }
 ?>
 <!doctype html>
