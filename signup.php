@@ -4,7 +4,7 @@ $user = 0;
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     include 'connect.php';
     $userName = $_POST['username'];
-    $email = $_POST['email'];
+    //$email = $_POST['email'];
     $password = $_POST['password'];
 
     /*
@@ -27,7 +27,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $user = 1;
         }
         else{
-            $sql = "insert into registration(username,email,password) values('$userName','$email','" . md5($password) . "')";
+            $sql = "insert into registration(username,password) values('$userName','" . md5($password) . "')";
             $result = mysqli_query($con,$sql);
             if($result){
                 //echo "Signed up successfully";
@@ -75,15 +75,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" placeholder="Enter your name" name="username">
             </div>
+            <!-------
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" placeholder="Enter your email" name="email">
             </div>
+            ------>
             <div class="mb-3">
                 <label for="password" class="form-label">password</label>
                 <input type="password" class="form-control" placeholder="Enter your password" name="password">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">sign up</button>
         </form>
     </div>
 </body>
