@@ -1,4 +1,6 @@
 <?php
+$success = 0;
+$user = 0;
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     include 'connect.php';
     $userName = $_POST['username'];
@@ -16,12 +18,24 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         die(mysqli_error($con));
     }
     */
-    $sql = "select * from registration where username='$username'";
+    $sql = "select * from registration where username='$userName'";
     $result = mysqli_query($con,$sql);
     if($result){
         $num=mysqli_num_rows($result);
         if($num>0){
-            echo "User already exists";
+            //echo "User already exists";
+            $user = 1;
+        }
+        else{
+            $sql = "insert into registration(username,email,password) values('$userName','$email','" . md5($password) . "')";
+            $result = mysqli_query($con,$sql);
+            if($result){
+                //echo "Signed up successfully";
+                $success = 1;
+            }
+            else{
+                die(mysqli_error($con));
+            }
         }
     }
 
@@ -38,6 +52,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 </head>
 
 <body>
+    <?php
+    if($user){
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Please login </strong> User already exists.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>';
+    }
+    ?>
+     <?php
+    if($success){
+        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success </strong> You have successfully signed up.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>';
+    }
+    ?>
     <h1 class="text-center">Sign up page</h1>
     <div class="container mt-5">
         <form action="signup.php" method="post">

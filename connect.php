@@ -6,10 +6,7 @@ $dbName = 'complete_signup_login_logout';
 
 $con=mysqli_connect($hostName,$userName,$password,$dbName);
 
-if($con){
-    echo "Database connected";
-}
-else {
+if(!$con){
     die(mysqli_connect_error($con));
 }
 ?>
