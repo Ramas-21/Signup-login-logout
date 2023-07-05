@@ -32,6 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if($result){
                 //echo "Signed up successfully";
                 $success = 1;
+                header('location:login.php');
             }
             else{
                 die(mysqli_error($con));
